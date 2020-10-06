@@ -1,6 +1,7 @@
 import torch
 import os
 import numpy as np
+import dataset
 
 def seed_everything(seed_value):
     random.seed(seed_value)
@@ -39,5 +40,5 @@ def get_selected_text(text, start_idx, end_idx, offsets):
     return selected_text
 
 def get_test_loader(df):
-    loader = torch.utils.data.DataLoader(TweetDataset(df))
+    loader = torch.utils.data.DataLoader(dataset.TweetDataset(df))
     return loader
