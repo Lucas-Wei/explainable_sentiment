@@ -8,6 +8,10 @@ config = configparser.ConfigParser()
 config.read('../config/config.ini')
 config_path = config['PATHS']['ROBERTA_PATH']
 model_path = config['PATHS']['ROBERTA_PATH']
+INPUT_SIZE = config['MODEL']['MAXLEN']
+HIDDEN_SIZE = config['MODEL']['HIDDEN_SIZE']
+NUM_LAYERS = config['MODEL']['NUM_LAYERS']
+
 
 class TweetRobertaModel(nn.Module):
     def __init__(self):
@@ -36,5 +40,23 @@ class TweetRobertaModel(nn.Module):
         
         return start_logits, end_logits
 
-if __name__ == "__main__":
-    model = TweetRobertaModel()
+class TweetLSTMModel(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.lstm = nn.LSTM(INPUT_SIZE, HIDDEN_SIZE, NUM_LAYERS, batch_first=True)
+        self.dropout = nn.Dropout(0.5)
+        self.fc = nn.Linear(HIDDEN_SIZE, 2)
+
+    def forward(self, input_ids, attention_mask):
+        x = self.lstm(input_ids, attention_mask)
+
+        x = self.dropout(x)
+        x = self.fc(x)
+        start_logits, end_logits = x.split(1, dim=-1)
+        start_logits = start_logits.squeeze(-1)
+        end_logits = end_logits.squeeze(-1)
+        
+        return start_logits, end_logits
+
+if __name__ == '__main__':
+    model = TweetLSTMModel()
