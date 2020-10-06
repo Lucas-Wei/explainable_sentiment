@@ -1,9 +1,12 @@
 from sklearn.model_selection import StratifiedKFold
 import pandas as pd
 from model import TweetModel
+import torch
 import torch.optim
 import configparser
 from engine import train_fn
+from utils import seed_everything
+from dataset import TweetDataset
 
 config = configparser.ConfigParser()
 config.read('../config/config.ini')
@@ -12,8 +15,33 @@ N_SPLITS = int(config['MODEL']['N_SPLITS'])
 BATCH_SIZE = int(config['MODEL']['BATCH_SIZE'])
 LR = float(config['MODEL']['LR'])
 TRAINING_FILE = config['PATHS']['TRAINING_FILE']
+NUM_WORKERS = config['MODEL']['NUM_WORKERS']
+
+def get_train_val_loaders(df, train_idx, val_idx, batch_size=BATCH_SIZE):
+    train_df = df.iloc[train_idx]
+    val_df = df.iloc[val_idx]
+    
+    train_loader = torch.utils.data.DataLoader(
+        TweetDataset(train_df),
+        batch_size=batch_size,
+        shuffle=True,
+        num_workers=NUM_WORKERS,
+        drop_last=True)
+    
+    val_loader = torch.utils.data.DataLoader(
+        TweetDataset(val_df),
+        batch_size=batch_size,
+        shuffle=False,
+        num_workers=NUM_WORKERS)
+    
+    dataloaders_dict = {"train": train_loader, "val": val_loader}
+    
+    return dataloaders_dict
 
 def run()
+	seed = 42
+	seed_everything(seed)
+
     skf = StratifiedKFold(n_splits=N_SPLITS, shuffle=True, random_state=seed)
     train_df = pd.read_csv(TRAINING_FILE)
     train_df['text'] = train_df['text'].astype(str)

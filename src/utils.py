@@ -30,15 +30,3 @@ def compute_jaccard_score(text, start_idx, end_idx, start_logits, end_logits, of
         pred = get_selected_text(text, start_pred, end_pred, offsets)
     true = get_selected_text(text, start_idx, end_idx, offsets)
     return jaccard(true, pred)
-
-def get_selected_text(text, start_idx, end_idx, offsets):
-    selected_text = ""
-    for ix in range(start_idx, end_idx + 1):
-        selected_text += text[offsets[ix][0]: offsets[ix][1]]
-        if (ix + 1) < len(offsets) and offsets[ix][1] < offsets[ix + 1][0]:
-            selected_text += " "
-    return selected_text
-
-def get_test_loader(df):
-    loader = torch.utils.data.DataLoader(dataset.TweetDataset(df))
-    return loader

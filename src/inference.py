@@ -5,11 +5,21 @@ import torch
 import streamlit as st
 from model import TweetRobertaModel
 import configparser
-import utils
 
 config = configparser.ConfigParser()
 config.read('../config/config.ini')
 
+def get_selected_text(text, start_idx, end_idx, offsets):
+    selected_text = ""
+    for ix in range(start_idx, end_idx + 1):
+        selected_text += text[offsets[ix][0]: offsets[ix][1]]
+        if (ix + 1) < len(offsets) and offsets[ix][1] < offsets[ix + 1][0]:
+            selected_text += " "
+    return selected_text
+
+def get_test_loader(df):
+    loader = torch.utils.data.DataLoader(dataset.TweetDataset(df))
+    return loader
 
 st.title('Explainable Sentiment')
 
@@ -33,7 +43,7 @@ if input_text:
     df = pd.DataFrame(data=d, index=[0])
     # st.write(df)
     df['text'] = df['text'].astype(str)
-    test_loader = utils.get_test_loader(df)
+    test_loader = get_test_loader(df)
 
     data = next(iter(test_loader))
     ids = data['ids'].cuda()
@@ -51,6 +61,6 @@ if input_text:
         if start_pred > end_pred:
             pred = tweet
         else:
-            pred = utils.get_selected_text(tweet[i], start_pred, end_pred, offsets[i])
+            pred = get_selected_text(tweet[i], start_pred, end_pred, offsets[i])
     st.text('Words explain sentiment:')
     st.write(pred)
