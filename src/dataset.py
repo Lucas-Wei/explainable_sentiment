@@ -7,7 +7,7 @@ config = configparser.ConfigParser()
 config.read('../config/config.ini')
 
 class TweetDataset(torch.utils.data.Dataset):
-    def __init__(self, df, max_len=config['MODEL']['MAXLEN']):
+    def __init__(self, df, max_len=int(config['MODEL']['MAXLEN'])):
         self.df = df
         self.max_len = max_len
         self.labeled = 'selected_text' in df
