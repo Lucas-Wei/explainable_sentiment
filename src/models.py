@@ -8,9 +8,9 @@ config = configparser.ConfigParser()
 config.read('../config/config.ini')
 config_path = config['PATHS']['ROBERTA_PATH']
 model_path = config['PATHS']['ROBERTA_PATH']
-INPUT_SIZE = config['MODEL']['MAXLEN']
-HIDDEN_SIZE = config['MODEL']['HIDDEN_SIZE']
-NUM_LAYERS = config['MODEL']['NUM_LAYERS']
+INPUT_SIZE = int(config['MODEL']['MAXLEN'])
+HIDDEN_SIZE = int(config['MODEL']['HIDDEN_SIZE'])
+NUM_LAYERS = int(config['MODEL']['NUM_LAYERS'])
 
 
 class TweetRobertaModel(nn.Module):
