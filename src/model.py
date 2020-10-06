@@ -16,7 +16,7 @@ class TweetRobertaModel(nn.Module):
         self.roberta = RobertaModel.from_pretrained(
             os.path.join(config['PATHS']['ROBERTA_PATH'], 'pytorch_model.bin'), config=roberta_config)
         self.dropout = nn.Dropout(0.5)
-        self.fc = nn.Linear(config.hidden_size, 2)
+        self.fc = nn.Linear(roberta_config.hidden_size, 2)
         nn.init.normal_(self.fc.weight, std=0.02)
         nn.init.normal_(self.fc.bias, 0)
         
