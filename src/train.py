@@ -1,6 +1,6 @@
 from sklearn.model_selection import StratifiedKFold
 import pandas as pd
-import model
+import models
 import torch
 import torch.optim
 import configparser
@@ -48,7 +48,7 @@ def run():
     
     for fold, (train_idx, val_idx) in enumerate(skf.split(train_df, train_df.sentiment), start=1):
         print(f'Fold: {fold}')
-        model = model.TweetLSTMModel()
+        model = models.TweetLSTMModel()
         optimizer = torch.optim.AdamW(model.parameters(), lr=LR, betas=(0.9, 0.999))
         criterion = engine.loss_fn
         dataloaders_dict = get_train_val_loaders(train_df, train_idx, val_idx, BATCH_SIZE)
