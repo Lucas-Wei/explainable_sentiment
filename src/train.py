@@ -5,7 +5,6 @@ import torch
 import torch.optim
 import configparser
 from engine import train_fn
-from utils import seed_everything
 from dataset import TweetDataset
 
 config = configparser.ConfigParser()
