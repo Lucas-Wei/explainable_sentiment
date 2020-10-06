@@ -20,12 +20,12 @@ def run()
         model = TweetModel()
         optimizer = torch.optim.AdamW(model.parameters(), lr=config[LR], betas=(0.9, 0.999))
         criterion = loss_fn
-        dataloaders_dict = get_train_val_loaders(train_df, train_idx, val_idx, BATCH_SIZE)
+        dataloaders_dict = get_train_val_loaders(train_df, train_idx, val_idx, int(config[MODEL][BATCH_SIZE])
         
         train_fn(
             model,
             dataloaders_dict,
             criterion,
             optimizer,
-            NUM_EPOCHS,
+            int(config[MODEL][BATCH_SIZE],
             f'roberta_fold{fold}.pth')
