@@ -11,10 +11,10 @@ class TweetRobertaModel(nn.Module):
         super().__init__()
         
         roberta_config = RobertaConfig.from_pretrained(
-            os.path.join(config[PATH][ROBERT_PATH], "config.json"),
+            os.path.join(config[PATHS][ROBERT_PATH], "config.json"),
             output_hidden_states=True)
         self.roberta = RobertaModel.from_pretrained(
-            os.path.join(config[PATH][ROBERT_PATH], "pytorch_model.bin"), config=roberta_config)
+            os.path.join(config[PATHS][ROBERT_PATH], "pytorch_model.bin"), config=roberta_config)
         self.dropout = nn.Dropout(0.5)
         self.fc = nn.Linear(config.hidden_size, 2)
         nn.init.normal_(self.fc.weight, std=0.02)

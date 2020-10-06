@@ -17,7 +17,7 @@ st.title('Explainable Sentiment')
 def build_model():
     model = TweetRobertaModel()
     model.cuda()
-    model.load_state_dict(torch.load(os.path.join(config[PATH][PTHS_PATH], 'roberta_fold1.pth')))
+    model.load_state_dict(torch.load(os.path.join(config[PATHS][PTHS_PATH], 'roberta_fold1.pth')))
     model.eval()
     return model
 
