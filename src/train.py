@@ -61,3 +61,6 @@ def run()
             optimizer,
             int(config[MODEL][BATCH_SIZE],
             f'roberta_fold{fold}.pth')
+
+if __name__ == "__main__":
+    run()

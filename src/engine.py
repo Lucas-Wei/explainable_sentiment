@@ -56,3 +56,4 @@ def train_fn(model, dataloaders_dict, criterion, optimizer, num_epochs, filename
         
             print('Epoch {}/{} | {:^5} | Loss: {:.4f} | Jaccard: {:.4f}'.format(epoch + 1, num_epochs, phase, epoch_loss, epoch_jaccard))
     torch.save(model.state_dict(), filename)
+
