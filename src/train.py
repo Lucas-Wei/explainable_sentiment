@@ -17,6 +17,9 @@ LR = float(config['MODEL']['LR'])
 TRAINING_FILE = config['PATHS']['TRAINING_FILE']
 NUM_WORKERS = config['MODEL']['NUM_WORKERS']
 
+if __name__ == '__main__':
+	print('123')
+
 def get_train_val_loaders(df, train_idx, val_idx, batch_size=BATCH_SIZE):
     train_df = df.iloc[train_idx]
     val_df = df.iloc[val_idx]
@@ -39,7 +42,6 @@ def get_train_val_loaders(df, train_idx, val_idx, batch_size=BATCH_SIZE):
     return dataloaders_dict
 
 def run():
-
     skf = StratifiedKFold(n_splits=N_SPLITS, shuffle=True)
     train_df = pd.read_csv(TRAINING_FILE)
     train_df['text'] = train_df['text'].astype(str)
@@ -59,6 +61,3 @@ def run():
             optimizer,
             int(config[MODEL][BATCH_SIZE],
             f'roberta_fold{fold}.pth')
-
-if __name__ == '__main__':
-	print('123')
