@@ -1,5 +1,6 @@
 import torch
 from torch import nn
+import utils
 
 def loss_fn(start_logits, end_logits, start_positions, end_positions):
     ce_loss = nn.CrossEntropyLoss()
@@ -43,7 +44,7 @@ def train_fn(model, dataloaders_dict, criterion, optimizer, num_epochs, filename
                     end_logits = torch.softmax(end_logits, dim=1).cpu().detach().numpy()
                     
                     for i in range(len(ids)):
-                        jaccard_score = compute_jaccard_score(
+                        jaccard_score = utils.compute_jaccard_score(
                             tweet[i],
                             start_idx[i],
                             end_idx[i],
