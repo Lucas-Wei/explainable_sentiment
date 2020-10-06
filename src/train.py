@@ -14,7 +14,7 @@ N_SPLITS = int(config['MODEL']['N_SPLITS'])
 BATCH_SIZE = int(config['MODEL']['BATCH_SIZE'])
 LR = float(config['MODEL']['LR'])
 TRAINING_FILE = config['PATHS']['TRAINING_FILE']
-NUM_WORKERS = config['MODEL']['NUM_WORKERS']
+NUM_WORKERS = int(config['MODEL']['NUM_WORKERS'])
 
 
 def get_train_val_loaders(df, train_idx, val_idx, batch_size=BATCH_SIZE):
