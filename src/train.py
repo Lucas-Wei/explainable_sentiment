@@ -60,5 +60,5 @@ def run():
             int(config[MODEL][BATCH_SIZE],
             f'roberta_fold{fold}.pth')
 
-if __name__ == "__main__":
-	run()
+if __name__ == '__main__':
+	print('123')
