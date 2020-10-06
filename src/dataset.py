@@ -1,15 +1,18 @@
 import tokenizers
 import torch
+import configparser
 
+config = configparser.ConfigParser()
+config.read('../config/config.ini')
 
 class TweetDataset(torch.utils.data.Dataset):
-    def __init__(self, df, max_len=MAXLEN):
+    def __init__(self, df, max_len=config[MODEL][MAXLEN]):
         self.df = df
         self.max_len = max_len
         self.labeled = 'selected_text' in df
         self.tokenizer = tokenizers.ByteLevelBPETokenizer(
-            vocab_file = '../input/roberta-base/vocab.json',
-            merges_file = '../input/roberta-base/merges.txt',
+            vocab_file = os.path.join(config[PATHS][ROBERTA_PATH], 'vocab.json'),
+            merges_file = os.path.join(config[PATHS][ROBERTA_PATH], 'merges.txt'),
             lowercase = True,
             add_prefix_space = True)
         
