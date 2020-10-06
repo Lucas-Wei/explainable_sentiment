@@ -15,6 +15,7 @@ BATCH_SIZE = int(config['MODEL']['BATCH_SIZE'])
 LR = float(config['MODEL']['LR'])
 TRAINING_FILE = config['PATHS']['TRAINING_FILE']
 NUM_WORKERS = int(config['MODEL']['NUM_WORKERS'])
+NUM_EPOCHS = int(config['MODEL']['NUM_EPOCHS'])
 
 
 def get_train_val_loaders(df, train_idx, val_idx, batch_size=BATCH_SIZE):
@@ -57,7 +58,7 @@ def run():
             dataloaders_dict,
             criterion,
             optimizer,
-            BATCH_SIZE,
+            NUM_EPOCHS,
             '../config/roberta-pths/' + f'roberta_fold{fold+1}.pth')
 
 if __name__ == '__main__':
