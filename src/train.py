@@ -4,7 +4,7 @@ from model import TweetRobertaModel
 import torch
 import torch.optim
 import configparser
-from engine import train_fn
+import engine
 from dataset import TweetDataset
 
 config = configparser.ConfigParser()
@@ -49,10 +49,10 @@ def run():
         print(f'Fold: {fold}')
         model = TweetRobertaModel()
         optimizer = torch.optim.AdamW(model.parameters(), lr=LR, betas=(0.9, 0.999))
-        criterion = loss_fn
+        criterion = engine.loss_fn
         dataloaders_dict = get_train_val_loaders(train_df, train_idx, val_idx, BATCH_SIZE)
         
-        train_fn(
+        engine.train_fn(
             model,
             dataloaders_dict,
             criterion,
