@@ -38,7 +38,7 @@ def get_train_val_loaders(df, train_idx, val_idx, batch_size=BATCH_SIZE):
     
     return dataloaders_dict
 
-def run()
+def run():
 	seed = 42
 	seed_everything(seed)
 
