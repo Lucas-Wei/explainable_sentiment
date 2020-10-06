@@ -32,7 +32,8 @@ def train_fn(model, dataloaders_dict, criterion, optimizer, num_epochs, filename
                 optimizer.zero_grad()
                 
                 with torch.set_grad_enabled(phase == 'train'):
-                    start_logits, end_logits = model(ids, masks)
+                    # start_logits, end_logits = model(ids, masks)
+                    start_logits, end_logits = model(ids)
                     loss = criterion(start_logits, end_logits, start_idx, end_idx)
                     if phase == 'train':
                         loss.backward()
