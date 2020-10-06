@@ -47,8 +47,8 @@ class TweetLSTMModel(nn.Module):
         self.dropout = nn.Dropout(0.5)
         self.fc = nn.Linear(HIDDEN_SIZE, 2)
 
-    def forward(self, input_ids, attention_mask):
-        x = self.lstm(input_ids, attention_mask)
+    def forward(self, input_ids):
+        x = self.lstm(input_ids)
 
         x = self.dropout(x)
         x = self.fc(x)
