@@ -1,6 +1,7 @@
 import tokenizers
 import torch
 import configparser
+import os
 
 config = configparser.ConfigParser()
 config.read('../config/config.ini')
