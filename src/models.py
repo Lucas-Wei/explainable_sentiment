@@ -43,11 +43,16 @@ class TweetRobertaModel(nn.Module):
 class TweetLSTMModel(nn.Module):
     def __init__(self):
         super().__init__()
-        self.lstm = nn.LSTM(INPUT_SIZE, HIDDEN_SIZE, NUM_LAYERS, batch_first=True)
+        self.lstm = nn.LSTM(
+            input_size=INPUT_SIZE, 
+            hidden_size=HIDDEN_SIZE, 
+            num_layes=NUM_LAYERS, 
+            batch_first=True)
         self.dropout = nn.Dropout(0.5)
         self.fc = nn.Linear(HIDDEN_SIZE, 2)
 
     def forward(self, input_ids):
+        input_ids = input_ids.unsqueeze(-1)
         x = self.lstm(input_ids)
 
         x = self.dropout(x)
