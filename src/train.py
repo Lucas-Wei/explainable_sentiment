@@ -42,7 +42,7 @@ def get_train_val_loaders(df, train_idx, val_idx, batch_size=BATCH_SIZE):
 def run():
     skf = StratifiedKFold(n_splits=N_SPLITS, shuffle=True)
     train_df = pd.read_csv(TRAINING_FILE)
-    train_df = train_df[:100]
+    # train_df = train_df[:100]
     train_df['text'] = train_df['text'].astype(str)
     train_df['selected_text'] = train_df['selected_text'].astype(str)
     
