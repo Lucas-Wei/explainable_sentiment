@@ -58,7 +58,7 @@ class TweetLSTMModel(nn.Module):
     def forward(self, input_ids):
 
         embedded_ids = self.embedding(input_ids)
-        x = self.lstm(embedded_ids)
+        x, _ = self.lstm(embedded_ids)
         x = self.dropout(x)
         x = self.fc(x)
         start_logits, end_logits = x.split(1, dim=-1)
