@@ -1,6 +1,7 @@
 import torch
 from torch import nn
 import utils
+from tqdm import tqdm
 
 def loss_fn(start_logits, end_logits, start_positions, end_positions):
     ce_loss = nn.CrossEntropyLoss()
@@ -21,7 +22,8 @@ def train_fn(model, dataloaders_dict, criterion, optimizer, num_epochs, filename
             epoch_loss = 0.0
             epoch_jaccard = 0.0
             
-            for data in (dataloaders_dict[phase]):
+            tk0 = tqdm(dataloaders_dict[phase], total=len(dataloaders_dict[phase]))
+            for data in (tk0):
                 ids = data['ids'].cuda()
                 masks = data['masks'].cuda()
                 tweet = data['tweet']
