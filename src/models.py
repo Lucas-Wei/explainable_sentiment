@@ -44,7 +44,7 @@ class TweetLSTMModel(nn.Module):
     def __init__(self):
         super().__init__()
         self.lstm = nn.LSTM(
-            input_size=INPUT_SIZE, 
+            input_size=1, 
             hidden_size=HIDDEN_SIZE, 
             num_layers=NUM_LAYERS, 
             batch_first=True)
