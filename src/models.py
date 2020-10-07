@@ -46,7 +46,7 @@ class TweetLSTMModel(nn.Module):
         self.lstm = nn.LSTM(
             input_size=INPUT_SIZE, 
             hidden_size=HIDDEN_SIZE, 
-            num_layes=NUM_LAYERS, 
+            num_layers=NUM_LAYERS, 
             batch_first=True)
         self.dropout = nn.Dropout(0.5)
         self.fc = nn.Linear(HIDDEN_SIZE, 2)
