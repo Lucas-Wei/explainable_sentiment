@@ -3,7 +3,7 @@ import pandas as pd
 import os
 import torch 
 import streamlit as st
-from model import TweetRobertaModel
+import model
 import configparser
 
 config = configparser.ConfigParser()
@@ -25,7 +25,7 @@ st.title('Explainable Sentiment')
 
 @st.cache
 def build_model():
-    model = TweetRobertaModel()
+    model = TweetRoBERTaModel()
     model.cuda()
     model.load_state_dict(torch.load(os.path.join(config['PATHS']['PTHS_PATH'], 'roberta_fold1.pth')))
     model.eval()

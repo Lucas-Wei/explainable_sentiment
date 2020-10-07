@@ -10,7 +10,7 @@ def loss_fn(start_logits, end_logits, start_positions, end_positions):
     total_loss = start_loss + end_loss
     return total_loss
 
-def train_fn(model, dataloaders_dict, criterion, optimizer, num_epochs, filename):
+def train_fn(model, selected_model, dataloaders_dict, criterion, optimizer, num_epochs, filename):
     model.cuda()
     for epoch in range(num_epochs):
         for phase in ['train', 'val']:
@@ -34,8 +34,10 @@ def train_fn(model, dataloaders_dict, criterion, optimizer, num_epochs, filename
                 optimizer.zero_grad()
                 
                 with torch.set_grad_enabled(phase == 'train'):
-                    # start_logits, end_logits = model(ids, masks)
-                    start_logits, end_logits = model(ids)
+                    if selected_model == 'LSTM':
+                        start_logits, end_logits = model(ids)
+                    elif selected_model == 'RoBERTa':
+                        start_logits, end_logits = model(ids, masks)
                     loss = criterion(start_logits, end_logits, start_idx, end_idx)
                     if phase == 'train':
                         loss.backward()

@@ -15,7 +15,7 @@ NUM_VOCAB = int(config['MODEL']['NUM_VOCAB'])
 NUM_EMBEDDING = int(config['MODEL']['NUM_EMBEDDING'])
 
 
-class TweetRobertaModel(nn.Module):
+class TweetRoBERTaModel(nn.Module):
     def __init__(self):
         super().__init__()
         
