@@ -62,7 +62,7 @@ def run():
             criterion,
             optimizer,
             NUM_EPOCHS,
-            '../config/roberta-pths/' + f'roberta_fold{fold+1}.pth')
+            '../config/roberta-pths/' + f'{SELECTED_MODEL}_fold{fold}.pth')
 
 if __name__ == '__main__':
 	run()
