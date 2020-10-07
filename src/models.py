@@ -11,6 +11,8 @@ model_path = config['PATHS']['ROBERTA_PATH']
 INPUT_SIZE = int(config['MODEL']['MAXLEN'])
 HIDDEN_SIZE = int(config['MODEL']['HIDDEN_SIZE'])
 NUM_LAYERS = int(config['MODEL']['NUM_LAYERS'])
+NUM_VOCAB = int(config['MODEL']['NUM_VOCAB'])
+NUM_EMBEDDING = int(config['MODEL']['NUM_EMBEDDING'])
 
 
 class TweetRobertaModel(nn.Module):
@@ -43,6 +45,8 @@ class TweetRobertaModel(nn.Module):
 class TweetLSTMModel(nn.Module):
     def __init__(self):
         super().__init__()
+
+        self.embedding = nn.Embedding(NUM_VOCAB, NUM_EMBEDDING)
         self.lstm = nn.LSTM(
             input_size=1, 
             hidden_size=HIDDEN_SIZE, 
@@ -52,9 +56,9 @@ class TweetLSTMModel(nn.Module):
         self.fc = nn.Linear(HIDDEN_SIZE, 2)
 
     def forward(self, input_ids):
-        input_ids = input_ids.unsqueeze(-1)
-        x = self.lstm(input_ids)
 
+        embedded_ids = self.embedding(input_ids)
+        x = self.lstm(embedded_ids)
         x = self.dropout(x)
         x = self.fc(x)
         start_logits, end_logits = x.split(1, dim=-1)
