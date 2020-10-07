@@ -48,7 +48,7 @@ class TweetLSTMModel(nn.Module):
 
         self.embedding = nn.Embedding(NUM_VOCAB, NUM_EMBEDDING)
         self.lstm = nn.LSTM(
-            input_size=1, 
+            input_size=NUM_EMBEDDING, 
             hidden_size=HIDDEN_SIZE, 
             num_layers=NUM_LAYERS, 
             batch_first=True)
