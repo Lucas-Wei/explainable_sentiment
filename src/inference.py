@@ -3,7 +3,7 @@ import pandas as pd
 import os
 import torch 
 import streamlit as st
-import model
+import models
 import configparser
 
 config = configparser.ConfigParser()
@@ -49,7 +49,7 @@ if input_text:
     df['text'] = df['text'].astype(str)
     test_loader = get_test_loader(df)
     data = next(iter(test_loader))
-    
+
     ids = data['ids'].cuda()
     masks = data['masks'].cuda()
     tweet = data['tweet']
