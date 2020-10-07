@@ -51,9 +51,10 @@ class TweetLSTMModel(nn.Module):
             input_size=NUM_EMBEDDING, 
             hidden_size=HIDDEN_SIZE, 
             num_layers=NUM_LAYERS, 
-            batch_first=True)
+            batch_first=True,
+            bidirectional=True)
         self.dropout = nn.Dropout(0.5)
-        self.fc = nn.Linear(HIDDEN_SIZE, 2)
+        self.fc = nn.Linear(2*HIDDEN_SIZE, 2)
 
     def forward(self, input_ids):
 
