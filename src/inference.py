@@ -71,4 +71,5 @@ if input_text:
 uploaded_file = st.file_uploader("Choose a file(.csv)", type='csv')
 if uploaded_file:
     # df = pd.read_csv(uploaded_file)
-    st.write(uploaded_file)
+    text_io = io.TextIOWrapper(uploaded_file)
+    st.write(text_io)
