@@ -71,6 +71,6 @@ if input_text:
 
 uploaded_file = st.file_uploader("Choose a file(.csv)", type='csv')
 if uploaded_file:
-    df = pd.read_csv(uploaded_file)
+    df2 = pd.read_csv(uploaded_file)
     # text_io = io.TextIOWrapper(uploaded_file)
-    st.dataframe(data.head(10))
+    st.dataframe(df2.head(10))
