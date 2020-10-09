@@ -66,7 +66,7 @@ def file_mode():
 		href = f'<a href="data:file/csv;base64,{b64}">Download CSV File (Save as .csv)</a>' # (right-click and save as &lt;some_name&gt;.csv)
 		st.markdown(href, unsafe_allow_html=True)
 
-	uploaded_file.close()
+	uploaded_file = None
 
 if selection == 'Single Text & Sentiment':
 	single_mode()
