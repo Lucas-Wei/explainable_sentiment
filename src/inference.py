@@ -68,7 +68,7 @@ if input_text:
     st.text('Words explain sentiment:')
     st.write(pred)
 
-uploaded_file = st.file_uploader("Choose a file(.csv)")
+uploaded_file = st.file_uploader("Choose a file(.csv)", type='csv')
 if uploaded_file:
-    df = pd.read_csv(uploaded_file)
+    # df = pd.read_csv(uploaded_file)
     st.write(uploaded_file)
