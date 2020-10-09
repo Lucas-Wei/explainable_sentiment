@@ -69,8 +69,10 @@ if input_text:
     st.text('Words explain sentiment:')
     st.write(pred)
 
+st.set_option('deprecation.showfileUploaderEncoding', False)
+
 uploaded_file = st.file_uploader("Choose a file(.csv)", type='csv')
 if uploaded_file:
-    df2 = pd.read_csv(uploaded_file)
+    df2 = pd.read_csv(uploaded_file, usecols=['text', 'sentiment'])
     # text_io = io.TextIOWrapper(uploaded_file)
     st.dataframe(df2.head(10))
