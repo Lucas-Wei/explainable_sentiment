@@ -53,7 +53,7 @@ def file_mode():
 	if uploaded_file:
 		df = pd.read_csv(uploaded_file, usecols=['text', 'sentiment'])
 		st.dataframe(df.head(5)) # show first 5 rows
-		st.write(df.shape[0])
+		st.write('Total rows:', df.shape[0])
 
 		pred = inference.predict(df, model=model)
 		df['support words'] = pred
@@ -63,8 +63,10 @@ def file_mode():
 
 		# create download link
 		b64 = base64.b64encode(csv.encode()).decode()  # some strings <-> bytes conversions necessary here
-		href = f'<a href="data:file/csv;base64,{b64}">Download CSV File</a>' # (right-click and save as &lt;some_name&gt;.csv)
+		href = f'<a href="data:file/csv;base64,{b64}">Download CSV File (Save as .csv)</a>' # (right-click and save as &lt;some_name&gt;.csv)
 		st.markdown(href, unsafe_allow_html=True)
+		
+		uploaded_file.close()
 
 if selection == 'Single Text & Sentiment':
 	single_mode()
