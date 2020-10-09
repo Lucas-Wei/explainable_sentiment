@@ -28,53 +28,28 @@ def get_test_loader(df):
     loader = torch.utils.data.DataLoader(dataset.TweetDataset(df))
     return loader
 
-st.title('Explainable Sentiment')
-
-@st.cache
-def build_model():
-    model = models.TweetRoBERTaModel()
-    model.cuda()
-    model.load_state_dict(torch.load(os.path.join(PTHS_PATH, 'RoBERTa_fold1.pth')))
-    model.eval()
-    return model
-
-model = build_model()
-
-input_text = st.text_area('Text Here', max_chars=144)
-sentiment = st.selectbox(
-    'Choose Sentiment:',
-    ('negative', 'neutral', 'positive'))
-
-if input_text:
-    d = {'text': input_text, 'sentiment': sentiment}
-    df = pd.DataFrame(data=d, index=[0])
+def predict(df, model):
     df['text'] = df['text'].astype(str)
-    test_loader = get_test_loader(df)
-    data = next(iter(test_loader))
+    pred_loader = get_test_loader(df)
+    predictions = []
 
-    ids = data['ids'].cuda()
-    masks = data['masks'].cuda()
-    tweet = data['tweet']
-    offsets = data['offsets'].numpy()
+    for data in test_loader:
+        ids = data['ids'].cuda()
+        masks = data['masks'].cuda()
+        tweet = data['tweet']
+        offsets = data['offsets'].numpy()
 
-    with torch.no_grad():
-        output = model(ids, masks)
-        start_logits = torch.softmax(output[0], dim=1).cpu().detach().numpy()
-        end_logits = torch.softmax(output[1], dim=1).cpu().detach().numpy()
-        st.write(start_logits)
-        st.write(end_logits)
-    for i in range(len(ids)):
-        start_pred = np.argmax(start_logits)
-        end_pred = np.argmax(end_logits)
-        pred = get_selected_text(tweet[i], start_pred, end_pred, offsets[i])
+        with torch.no_grad():
+            output = model(ids, masks)
+            start_logits = torch.softmax(output[0], dim=1).cpu().detach().numpy()
+            end_logits = torch.softmax(output[1], dim=1).cpu().detach().numpy()
 
-    st.text('Words explain sentiment:')
-    st.write(pred)
+        for i in range(len(ids)):
+            start_pred = np.argmax(start_logits)
+            end_pred = np.argmax(end_logits)
+            pred = get_selected_text(tweet[i], start_pred, end_pred, offsets[i])
+            predictions.append(pred)
 
-st.set_option('deprecation.showfileUploaderEncoding', False)
+    return predictions
 
-uploaded_file = st.file_uploader("Choose a file(.csv)", type='csv')
-if uploaded_file:
-    df2 = pd.read_csv(uploaded_file, usecols=['text', 'sentiment'])
-    # text_io = io.TextIOWrapper(uploaded_file)
-    st.dataframe(df2.head(10))
+    #data = next(iter(test_loader))
