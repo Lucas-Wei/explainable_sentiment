@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import base64
 import os
 import torch 
 import streamlit as st
@@ -51,11 +52,12 @@ def file_mode():
 	uploaded_file = st.file_uploader("", type='csv')
 	if uploaded_file:
 		df = pd.read_csv(uploaded_file, usecols=['text', 'sentiment'])
-		st.dataframe(df.head(10)) # show first 10 rows
+		st.dataframe(df.head(5)) # show first 5 rows
+		st.write(df.shape[0])
 
 		pred = inference.predict(df, model=model)
 		df['support words'] = pred
-		st.dataframe(df.head(10)) # show firt 10 predictions
+		st.dataframe(df.head(5)) # show first 5 predictions
 
 		csv = df.to_csv(index=False)
 
