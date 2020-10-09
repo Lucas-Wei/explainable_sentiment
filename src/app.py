@@ -65,9 +65,8 @@ def file_mode():
 		b64 = base64.b64encode(csv.encode()).decode()  # some strings <-> bytes conversions necessary here
 		href = f'<a href="data:file/csv;base64,{b64}">Download CSV File (Save as .csv)</a>' # (right-click and save as &lt;some_name&gt;.csv)
 		st.markdown(href, unsafe_allow_html=True)
-		df = None
-
-	uploaded_file.close()
+		
+		uploaded_file.close()
 
 if selection == 'Single Text & Sentiment':
 	single_mode()
