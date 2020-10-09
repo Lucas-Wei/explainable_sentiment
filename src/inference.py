@@ -4,14 +4,8 @@ import os
 import torch 
 import streamlit as st
 import models
-import configparser
 import dataset
 import io
-
-config = configparser.ConfigParser()
-config.read('../config/config.ini')
-
-PTHS_PATH = config['PATHS']['PTHS_PATH']
 
 def get_selected_text(text, start_idx, end_idx, offsets):
     if start_pred > end_pred:

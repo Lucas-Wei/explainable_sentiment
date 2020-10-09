@@ -8,6 +8,12 @@ import configparser
 import dataset
 import io
 import inference
+import configparser
+
+config = configparser.ConfigParser()
+config.read('../config/config.ini')
+
+PTHS_PATH = config['PATHS']['PTHS_PATH']
 
 st.title('Explainable Sentiment')
 st.sidebar.title('App Mode')
