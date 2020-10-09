@@ -64,6 +64,8 @@ if input_text:
     for i in range(len(ids)):
         start_pred = np.argmax(start_logits)
         end_pred = np.argmax(end_logits)
+        st.write(start_pred)
+        st.write(end_pred)
         pred = get_selected_text(tweet[i], start_pred, end_pred, offsets[i])
 
     st.text('Words explain sentiment:')
