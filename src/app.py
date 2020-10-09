@@ -48,7 +48,7 @@ def single_mode():
 def file_mode():
 	st.set_option('deprecation.showfileUploaderEncoding', False)
 
-	uploaded_file = st.file_uploader("Choose a file(.csv)", type='csv')
+	uploaded_file = st.file_uploader("", type='csv')
 	if uploaded_file:
 		df = pd.read_csv(uploaded_file, usecols=['text', 'sentiment'])
 		st.dataframe(df.head(10)) # show first 10 rows
