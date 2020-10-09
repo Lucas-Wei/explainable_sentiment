@@ -49,6 +49,7 @@ def single_mode():
 def file_mode():
 	st.set_option('deprecation.showfileUploaderEncoding', False)
 
+	uploaded_file = None
 	uploaded_file = st.file_uploader("", type='csv')
 	if uploaded_file:
 		df = pd.read_csv(uploaded_file, usecols=['text', 'sentiment'])
@@ -65,7 +66,7 @@ def file_mode():
 		b64 = base64.b64encode(csv.encode()).decode()  # some strings <-> bytes conversions necessary here
 		href = f'<a href="data:file/csv;base64,{b64}">Download CSV File (Save as .csv)</a>' # (right-click and save as &lt;some_name&gt;.csv)
 		st.markdown(href, unsafe_allow_html=True)
-		
+
 		uploaded_file.close()
 
 if selection == 'Single Text & Sentiment':
