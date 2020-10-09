@@ -8,7 +8,7 @@ import dataset
 import io
 
 def get_selected_text(text, start_idx, end_idx, offsets):
-    if start_pred > end_pred:
+    if start_idx > end_idx
         selected_text = tweet
     else:
         selected_text = ""
