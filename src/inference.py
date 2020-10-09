@@ -27,7 +27,7 @@ def predict(df, model):
     pred_loader = get_test_loader(df)
     predictions = []
 
-    for data in test_loader:
+    for data in pred_loader:
         ids = data['ids'].cuda()
         masks = data['masks'].cuda()
         tweet = data['tweet']
