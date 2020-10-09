@@ -61,11 +61,11 @@ if input_text:
         output = model(ids, masks)
         start_logits = torch.softmax(output[0], dim=1).cpu().detach().numpy()
         end_logits = torch.softmax(output[1], dim=1).cpu().detach().numpy()
+        st.write(start_logits)
+        st.write(end_logits)
     for i in range(len(ids)):
         start_pred = np.argmax(start_logits)
         end_pred = np.argmax(end_logits)
-        st.write(start_pred)
-        st.write(end_pred)
         pred = get_selected_text(tweet[i], start_pred, end_pred, offsets[i])
 
     st.text('Words explain sentiment:')
