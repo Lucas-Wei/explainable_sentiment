@@ -9,7 +9,6 @@ import configparser
 import dataset
 import io
 import inference
-import configparser
 
 config = configparser.ConfigParser()
 config.read('../config/config.ini')
@@ -22,8 +21,10 @@ selection = st.sidebar.radio("Option:", ['Single Text & Sentiment', 'Upload File
 
 @st.cache
 def load_model():
+	use_cuda = torch.cuda.is_available()
+	device = torch.device('cuda' if use_cuda else 'cpu')
     model = models.TweetRoBERTaModel()
-    model.cuda()
+    model.to(device)
     model.load_state_dict(torch.load(os.path.join(PTHS_PATH, 'RoBERTa_fold1.pth')))
     model.eval()
     return model

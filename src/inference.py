@@ -23,13 +23,16 @@ def get_test_loader(df):
     return loader
 
 def predict(df, model):
+    use_cuda = torch.cuda.is_available()
+    device = torch.device('cuda' if use_cuda else 'cpu')
+
     df['text'] = df['text'].astype(str)
     pred_loader = get_test_loader(df)
     predictions = []
 
     for data in pred_loader:
-        ids = data['ids'].cuda()
-        masks = data['masks'].cuda()
+        ids = data['ids'].to(device)
+        masks = data['masks'].to(device)
         tweet = data['tweet']
         offsets = data['offsets'].numpy()
 
@@ -45,5 +48,3 @@ def predict(df, model):
             predictions.append(pred)
 
     return predictions
-
-    #data = next(iter(test_loader))

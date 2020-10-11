@@ -3,6 +3,8 @@ from torch import nn
 import utils
 from tqdm import tqdm
 
+
+
 def loss_fn(start_logits, end_logits, start_positions, end_positions):
     ce_loss = nn.CrossEntropyLoss()
     start_loss = ce_loss(start_logits, start_positions)
@@ -11,7 +13,10 @@ def loss_fn(start_logits, end_logits, start_positions, end_positions):
     return total_loss
 
 def train_fn(model, selected_model, dataloaders_dict, criterion, optimizer, num_epochs, filename):
-    model.cuda()
+    use_cuda = torch.cuda.is_available()
+    device = torch.device('cuda' if use_cuda else 'cpu')
+    model.to(device)
+
     for epoch in range(num_epochs):
         for phase in ['train', 'val']:
             if phase == 'train':
@@ -24,12 +29,12 @@ def train_fn(model, selected_model, dataloaders_dict, criterion, optimizer, num_
             
             tk0 = tqdm(dataloaders_dict[phase], total=len(dataloaders_dict[phase]))
             for data in (tk0):
-                ids = data['ids'].cuda()
-                masks = data['masks'].cuda()
+                ids = data['ids'].to(device)
+                masks = data['masks'].to(device)
                 tweet = data['tweet']
                 offsets = data['offsets'].numpy()
-                start_idx = data['start_idx'].cuda()
-                end_idx = data['end_idx'].cuda()
+                start_idx = data['start_idx'].to(device)
+                end_idx = data['end_idx'].to(device)
                 
                 optimizer.zero_grad()
                 
