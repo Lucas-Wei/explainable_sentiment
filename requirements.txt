@@ -1,6 +1,6 @@
 streamlit==0.67.1
-transfomers==3.0.2
-scikit-learn== .23.2
+transfomers
+scikit-learn==0.23.2
 numpy==1.19.1
 pandas==1.0.1
 tokenizers==0.8.1rc1
