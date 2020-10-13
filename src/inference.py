@@ -6,17 +6,7 @@ import streamlit as st
 import models
 import dataset
 import io
-
-def get_selected_text(text, start_idx, end_idx, offsets):
-    if start_idx > end_idx:
-        selected_text = text
-    else:
-        selected_text = ""
-        for ix in range(start_idx, end_idx + 1):
-            selected_text += text[offsets[ix][0]: offsets[ix][1]]
-            if (ix + 1) < len(offsets) and offsets[ix][1] < offsets[ix + 1][0]:
-                selected_text += " "
-    return selected_text
+from utils import get_selected_text
 
 def get_test_loader(df):
     loader = torch.utils.data.DataLoader(dataset.TweetDataset(df))

@@ -3,8 +3,6 @@ from torch import nn
 import utils
 from tqdm import tqdm
 
-
-
 def loss_fn(start_logits, end_logits, start_positions, end_positions):
     ce_loss = nn.CrossEntropyLoss()
     start_loss = ce_loss(start_logits, start_positions)
@@ -54,13 +52,11 @@ def train_fn(model, selected_model, dataloaders_dict, criterion, optimizer, num_
                     end_logits = torch.softmax(end_logits, dim=1).cpu().detach().numpy()
                     
                     for i in range(len(ids)):
-                        jaccard_score = utils.compute_jaccard_score(
-                            tweet[i],
-                            start_idx[i],
-                            end_idx[i],
-                            start_logits[i],
-                            end_logits[i],
-                            offsets[i])
+                        start_pred = np.argmax(start_logits[i])
+                        end_pred = np.argmax(end_logits[i])
+                        pred = utils.get_selected_text(tweet[i], start_pred, end_pred, offsets[i])
+                        true = utils.get_selected_text(tweet[i], start_idx[i], end_idx[i], offsets[i])
+                        jaccard_score = utils.jaccard(pred, true)
                         epoch_jaccard += jaccard_score
             epoch_loss = epoch_loss / len(dataloaders_dict[phase].dataset)
             epoch_jaccard = epoch_jaccard / len(dataloaders_dict[phase].dataset)
