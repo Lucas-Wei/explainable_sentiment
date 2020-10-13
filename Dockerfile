@@ -21,6 +21,7 @@ COPY ./src/dataset.py /tmp/src
 COPY ./src/models.py /tmp/src
 COPY ./config /tmp/config
 COPY ./test /tmp/test
+WORKDIR /tmp
 
 RUN pip install -r requirements.txt
 CMD ['streamlit', 'run', 'app.py']
