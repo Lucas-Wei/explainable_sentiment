@@ -25,7 +25,7 @@ def load_model():
 	device = torch.device('cuda' if use_cuda else 'cpu')
 	model = models.TweetRoBERTaModel()
 	model.to(device)
-	model.load_state_dict(torch.load(os.path.join(PTHS_PATH, 'RoBERTa_fold1.pth')))
+	model.load_state_dict(torch.load(os.path.join(PTHS_PATH, 'RoBERTa_best.pth')))
 	model.eval()
 	return model
 
