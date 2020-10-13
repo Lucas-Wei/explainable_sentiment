@@ -15,13 +15,10 @@ EXPOSE 8501
 
 COPY requirements.txt /tmp
 
-COPY ./src/app.py /tmp/src
-COPY ./src/inference.py /tmp/src
-COPY ./src/dataset.py /tmp/src
-COPY ./src/models.py /tmp/src
+COPY ./src /tmp/src
 COPY ./config /tmp/config
 COPY ./test /tmp/test
-WORKDIR /tmp
+WORKDIR /tmp/src
 
 RUN pip install -r requirements.txt
 CMD ["streamlit", "run", "app.py"]
