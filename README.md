@@ -4,12 +4,16 @@
 Explainable Sentiment extracts support word from text according to sentiment label.
 
 ## Installation
-Git clone (python>=3.6)
+Git clone and  (python>=3.6)
 ```bash
 $ git clone https://github.com/Lucas-Wei/explainable_sentiment.git
 $ cd explainable_sentiment
 $ pip install -r ./requirements.txt
 ```
+
+## Setup
+
+## Docker
 
 Build docker image.
 If you have a CUDA-compatible NVIDIA graphics card,
@@ -17,6 +21,12 @@ If you have a CUDA-compatible NVIDIA graphics card,
 $ docker build -t explainable_sentiment:cpu .
 ```
 
+## How To Use
+Run the application on your local machine:
 ```bash
-$ docker container run --rm -p 8501:8501 explainable_sentiment
+$ python ./src/app.py
+```
+Or run the application in Docker container:
+```bash
+$ docker container run --rm -p 8501:8501 explainable_sentiment:cpu
 ```
