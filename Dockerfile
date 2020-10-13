@@ -20,5 +20,5 @@ COPY ./config /tmp/config
 COPY ./test /tmp/test
 WORKDIR /tmp/src
 
-RUN pip install -r requirements.txt
+RUN pip install -r ../requirements.txt
 CMD ["streamlit", "run", "app.py"]
