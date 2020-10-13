@@ -24,4 +24,4 @@ COPY ./test /tmp/test
 WORKDIR /tmp
 
 RUN pip install -r requirements.txt
-CMD ['streamlit', 'run', 'app.py']
+CMD ["streamlit", "run", "app.py"]
