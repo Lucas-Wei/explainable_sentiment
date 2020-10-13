@@ -21,11 +21,10 @@ selection = st.sidebar.radio("Option:", ['Single Text & Sentiment', 'Upload File
 
 @st.cache
 def load_model():
-	use_cuda = torch.cuda.is_available()
-	device = torch.device('cuda' if use_cuda else 'cpu')
+	device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 	model = models.TweetRoBERTaModel()
 	model.to(device)
-	model.load_state_dict(torch.load(os.path.join(PTHS_PATH, 'RoBERTa_best.pth')))
+	model.load_state_dict(torch.load(os.path.join(PTHS_PATH, 'RoBERTa_best.pth'), map_location=device))
 	model.eval()
 	return model
 

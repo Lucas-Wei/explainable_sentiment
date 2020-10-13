@@ -12,8 +12,7 @@ def loss_fn(start_logits, end_logits, start_positions, end_positions):
     return total_loss
 
 def train_fn(model, selected_model, dataloaders_dict, criterion, optimizer, num_epochs, filename):
-    use_cuda = torch.cuda.is_available()
-    device = torch.device('cuda' if use_cuda else 'cpu')
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     model.to(device)
 
     for epoch in range(num_epochs):
