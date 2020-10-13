@@ -12,6 +12,11 @@ $ pip install -r ./requirements.txt
 ```
 
 Build docker image.
+If you have a CUDA-compatible NVIDIA graphics card,
 ```bash
 $ docker build -t explainable_sentiment .
+```
+
+```bash
+$ docker container run --rm -p 8501:8501 explainable_sentiment
 ```
