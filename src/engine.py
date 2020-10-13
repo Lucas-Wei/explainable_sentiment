@@ -2,6 +2,7 @@ import torch
 from torch import nn
 import utils
 from tqdm import tqdm
+import numpy as np
 
 def loss_fn(start_logits, end_logits, start_positions, end_positions):
     ce_loss = nn.CrossEntropyLoss()
