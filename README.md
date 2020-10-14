@@ -12,6 +12,14 @@ $ pip install -r ./requirements.txt
 ```
 
 ## Setup
+Download the config files for the pre-trained RoBERTa model
+```bash
+$ wget https://explainable-sentiment.s3.amazonaws.com/config/roberta-base.zip
+```
+Unzip it into config fold
+```bash
+$ unzip roberta-base.zip ./config
+```
 
 ## Docker
 
