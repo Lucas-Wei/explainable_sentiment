@@ -18,7 +18,7 @@ $ wget https://explainable-sentiment.s3.amazonaws.com/config/roberta-base.zip
 ```
 Unzip it into config fold
 ```bash
-$ unzip roberta-base.zip ./config
+$ unzip roberta-base.zip -d ./config
 ```
 
 ## Docker
