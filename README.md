@@ -3,6 +3,8 @@
 
 Explainable Sentiment extracts support word from text according to sentiment label.
 
+<img src="https://github.com/Lucas-Wei/explainable_sentiment/material/explainable_sentiment.gif">
+
 ## Installation
 Git clone and  (python>=3.6)
 ```bash
