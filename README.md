@@ -4,7 +4,9 @@
   <br>
 </h1>
 
-Explainable Sentiment extracts support word from text according to sentiment label.
+Explainable Sentiment extracts support word from text which has a sentiment label. This application helps us understand the reason behind deep learning model's prediction. Companyies can have a better understanding of their customers and products.
+
+<img src="https://github.com/Lucas-Wei/explainable_sentiment/blob/master/material/explainable_sentiment.png">
 
 ## Modes
 Explainable sentiment has 2 modes: input single text or upload a .csv file
