@@ -29,11 +29,11 @@ $ unzip roberta-base.zip -d ./config
 $ python ./src/app.py
 ```
 ### Docker
-1.Build docker image. (If you have a CUDA-compatible NVIDIA graphics card, use the Dockerfile in the fold "Dockerfiles")
+1. Build docker image. (If you have a CUDA-compatible NVIDIA graphics card, use the Dockerfile in the fold "Dockerfiles")
 ```bash
 $ docker build -t explainable_sentiment:cpu .
 ```
-2.Run application in Docker container.
+2. Run application in Docker container.
 ```bash
 $ docker container run --rm -p 8501:8501 explainable_sentiment:cpu
 ```
