@@ -27,6 +27,11 @@ Unzip it into config fold
 ```bash
 $ unzip roberta-base.zip -d ./config
 ```
+Download the fine-tuned trained model
+```bash
+$ wget https://explainable-sentiment.s3.amazonaws.com/config/RoBERTa_best.pth
+$ mv RoBERTa_best.pth ./config/roberta-pths
+```
 
 ## How To Use
 ### Local
