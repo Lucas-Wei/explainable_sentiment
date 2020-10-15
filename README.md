@@ -4,9 +4,10 @@
   <br>
 </h1>
 
-### RoBERTa based support word extractor 
-
 Explainable Sentiment extracts support word from text according to sentiment label.
+
+## Modes
+Explainable sentiment has 2 modes: input single text or upload a .csv file
 
 <img src="https://github.com/Lucas-Wei/explainable_sentiment/blob/master/material/explainable_sentiment.gif">
 
