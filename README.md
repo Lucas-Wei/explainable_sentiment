@@ -39,7 +39,8 @@ $ mv RoBERTa_best.pth ./config/roberta-pths
 ## How To Use
 ### Local
 ```bash
-$ streamlit run ./src/app.py
+$ cd src
+$ streamlit run app.py
 ```
 ### Docker
 1. Build docker image. (If you have a CUDA-compatible NVIDIA graphics card, use the Dockerfile in the fold "Dockerfiles")
