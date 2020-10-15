@@ -31,7 +31,7 @@ $ unzip roberta-base.zip -d ./config
 ## How To Use
 ### Local
 ```bash
-$ python ./src/app.py
+$ streamlit run ./src/app.py
 ```
 ### Docker
 1. Build docker image. (If you have a CUDA-compatible NVIDIA graphics card, use the Dockerfile in the fold "Dockerfiles")
