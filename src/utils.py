@@ -27,14 +27,10 @@ def clean_text(text):
     Make text lowercase
     Remove text in square brackets
     Remove links
-    Remove punctuation
     Remove words containing numbers.
     '''
     text = str(text).lower()
     text = re.sub('\[.*?\]', '', text)
     text = re.sub('https?://\S+|www\.\S+', '', text)
-    text = re.sub('<.*?>+', '', text)
-    text = re.sub('[%s]' % re.escape(string.punctuation), '', text)
-    text = re.sub('\n', '', text)
     text = re.sub('\w*\d\w*', '', text)
     return text
