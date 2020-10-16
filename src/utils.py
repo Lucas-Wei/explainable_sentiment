@@ -3,6 +3,7 @@ import os
 import numpy as np
 import dataset
 import re
+import string
 
 def get_selected_text(text, start_idx, end_idx, offsets):
     if start_idx > end_idx:
