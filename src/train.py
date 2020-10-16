@@ -6,6 +6,7 @@ import torch.optim
 import configparser
 import engine
 from dataset import TweetDataset
+from utils import clean_text
 
 config = configparser.ConfigParser()
 config.read('../config/config.ini')
@@ -42,8 +43,8 @@ def get_train_val_loaders(df, train_idx, val_idx, batch_size=BATCH_SIZE):
 def run():
     skf = StratifiedKFold(n_splits=N_SPLITS, shuffle=True)
     train_df = pd.read_csv(TRAINING_FILE)
-    train_df['text'] = train_df['text'].astype(str)
-    train_df['selected_text'] = train_df['selected_text'].astype(str)
+    train_df['text'] = train_df['text'].apply(lambda x:clean_text(x))
+    train_df['selected_text'] = train_df['selected_text'].apply(lambda x:clean_text(x))
     
     for fold, (train_idx, val_idx) in enumerate(skf.split(train_df, train_df.sentiment), start=1):
         print(f'Fold: {fold}')
