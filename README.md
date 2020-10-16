@@ -42,12 +42,20 @@ $ mv RoBERTa_best.pth ./config/roberta-pths
 $ cd src
 $ streamlit run app.py
 ```
+After running Explainable Sentiment, you can input any text in Single-Text mode.
+Or you can test on the files in test fold in upload-file mode.
 ### Docker
 1. Build docker image. (If you have a CUDA-compatible NVIDIA graphics card, use the Dockerfile in the fold "Dockerfiles")
 ```bash
 $ docker build -t explainable_sentiment:cpu .
 ```
 2. Run application in Docker container.
+```bash
+$ docker container run --rm -p 8501:8501 explainable_sentiment:cpu
+```
+
+## How To Train
+CUDA-compatible NVIDIA graphics card is needed to train the model(Pytorch+Cuda). The model will be saved in ./config/roberta-pths fold.
 ```bash
 $ docker container run --rm -p 8501:8501 explainable_sentiment:cpu
 ```
