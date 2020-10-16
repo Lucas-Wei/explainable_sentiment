@@ -57,5 +57,6 @@ $ docker container run --rm -p 8501:8501 explainable_sentiment:cpu
 ## How To Train
 CUDA-compatible NVIDIA graphics card is needed to train the model(Pytorch+Cuda). The model will be saved in ./config/roberta-pths fold.
 ```bash
-$ docker container run --rm -p 8501:8501 explainable_sentiment:cpu
+$ cd src
+$ python train.py
 ```
